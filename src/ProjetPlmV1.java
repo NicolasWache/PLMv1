@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -6,8 +5,6 @@ import java.util.Map.Entry;
 import java.util.Scanner;
 
 public class ProjetPlmV1 {
-	
-	
 
 	public static void main(String[] args) {
 		final String[][] dataAirplane = {
@@ -29,9 +26,9 @@ public class ProjetPlmV1 {
                 {"Siege", "Equipement", "120€"}
 				};
 		
-		HashMap<Integer, String[]> airPlanesData = addDatabase(dataAirplane);
-		HashMap<Integer, String[]> airPlanesDetailledData = addDatabase(dataDetailledAirplane);
-		HashMap<Integer, String[]> airPlanePieceCatalogue = addDatabase(pieceCatalogue);
+		final HashMap<Integer, String[]> airPlanesData = addDatabase(dataAirplane);
+		final HashMap<Integer, String[]> airPlanesDetailledData = addDatabase(dataDetailledAirplane);
+		final HashMap<Integer, String[]> airPlanePieceCatalogue = addDatabase(pieceCatalogue);
 		HashMap<Integer, ArrayList<String[]>> airPlanesDetailled = new HashMap<>();
 		ArrayList<String[]> airPlaneBuyPiece = new ArrayList<>();
 		
@@ -84,23 +81,26 @@ public class ProjetPlmV1 {
 					int pieceToRemove = scanner.nextInt();
 					removePiece(airPlanesDetailled, airplaneChoice, pieceToRemove);
 					System.out.println(displayAirplaneData2(airPlanesDetailled.get(airplaneChoice)));
-					
-					
-				
 				}
 				System.out.println("Souhaitez vous effectuer une nouvelle recherche? [o]Oui [n]non");
 				StayInWhile = verifyResponse(StayInWhile, scanner);
+				break;
+			case 4:
+				System.out.println("Quel avion souhaitez vous visualiser en détail?");
+				System.out.println(displayAirplaneData(airPlanesData));
+				int airPlaneToSee = scanner.nextInt();
+				System.out.println("Voici les pieces contenues dans l'avion selectionné: ");
+				if (airPlanesDetailled.containsKey(airPlaneToSee)) {
+					System.out.println(displayAirplaneData2(airPlanesDetailled.get(airPlaneToSee)));
+				} else {
+					System.out.println("Oups, l'avion séléctionné n'as pas encore de pieces.");
+				}
 				break;
 			case 5: 
 			StayInWhile = false;
 			break;
 			}
 		}
-		
-		
-		
-		
-
 	}
 	public static boolean verifyResponse (Boolean stayIn, Scanner scanner) {
 		String response = scanner.next().toLowerCase();
@@ -128,8 +128,6 @@ public class ProjetPlmV1 {
 		result+= (i+1+"="+Arrays.toString(data.get(i))+"\n");
 		return result;
 	}
-	
-	
 	public static String displayPieceAirplaneData (HashMap<Integer, ArrayList<String[]>> data, int key) {
 		String result= (key+"="+data.get(key)+"\n");
 		return result;
