@@ -79,7 +79,13 @@ public class ProjetPlmV1 {
 					System.out.println(displayAirplaneData2(airPlanesDetailled.get(airplaneChoice)));
 				
 					} else {
-						
+					System.out.println("Selectionner la pièce que vous souhaitez supprimer? ");
+					System.out.println(displayAirplaneData2(airPlanesDetailled.get(airplaneChoice)));
+					int pieceToRemove = scanner.nextInt();
+					removePiece(airPlanesDetailled, airplaneChoice, pieceToRemove);
+					System.out.println(displayAirplaneData2(airPlanesDetailled.get(airplaneChoice)));
+					
+					
 				
 				}
 				System.out.println("Souhaitez vous effectuer une nouvelle recherche? [o]Oui [n]non");
@@ -129,17 +135,16 @@ public class ProjetPlmV1 {
 		return result;
 	}
 	public static void addPiece (HashMap<Integer,ArrayList<String[]>> dataPiece, HashMap<Integer, String[]> catalogue,int planeKey, int pieceKey) {
-		
 		String[] piecetoAdd = catalogue.get(pieceKey);
-		
 		if (dataPiece.containsKey(planeKey)) {
 			dataPiece.get(planeKey).add(piecetoAdd);
 		} else {
 		dataPiece.put(planeKey, new ArrayList<String[]>());
-		
 		dataPiece.get(planeKey).add(piecetoAdd);
 		}
-		
+	}
+	public static void removePiece (HashMap<Integer, ArrayList<String[]>> data, int AirplanceChoice, int pieceToRemove) {
+		data.get(AirplanceChoice).remove(pieceToRemove-1);
 	}
 	public static String searchedByWord (HashMap<Integer, String[]> data, String word) {
 		String result = "";
