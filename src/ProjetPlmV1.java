@@ -12,13 +12,7 @@ public class ProjetPlmV1 {
                 {"A400M", "PLM_AIRBUS_DEFINITION", "Cargo"},
                 {"A350", "PLM_AIRBUS_FEASABILITY", "Passenger"},
                 {"A380", "PLM_AIRBUS_STOPPED", "Passenger"}
-				};	
-		final String[][] dataDetailledAirplane = {
-                {"Roue"},
-                {},
-                {},
-                {"Moteur"}
-				};	
+				};		
 		final String[][] pieceCatalogue = {
                 {"Aile", "Carrosserie", "500€" },
                 {"Moteur", "Piece de Moteur", "1200€"},
@@ -27,7 +21,6 @@ public class ProjetPlmV1 {
 				};
 		
 		final HashMap<Integer, String[]> airPlanesData = addDatabase(dataAirplane);
-		final HashMap<Integer, String[]> airPlanesDetailledData = addDatabase(dataDetailledAirplane);
 		final HashMap<Integer, String[]> airPlanePieceCatalogue = addDatabase(pieceCatalogue);
 		HashMap<Integer, ArrayList<String[]>> airPlanesDetailled = new HashMap<>();
 		ArrayList<String[]> airPlaneBuyPiece = new ArrayList<>();
@@ -47,6 +40,7 @@ public class ProjetPlmV1 {
 			
 			Scanner scanner = new Scanner(System.in);
 			int numberChoice = scanner.nextInt();
+			if (numberChoice<=5 )
 			switch(numberChoice) {
 			case 1:
 				System.out.println(displayAirplaneData(airPlanesData));
@@ -98,8 +92,10 @@ public class ProjetPlmV1 {
 				break;
 			case 5: 
 			StayInWhile = false;
+			System.out.println("Merci de votre visite");
 			break;
 			}
+			
 		}
 	}
 	public static boolean verifyResponse (Boolean stayIn, Scanner scanner) {
