@@ -75,14 +75,11 @@ public class ProjetPlmV1 {
 					System.out.println(displayAirplaneData(airPlanePieceCatalogue));
 					int airplancePieceChoice = scanner.nextInt();
 					addPiece(airPlanesDetailled, airPlanePieceCatalogue, airplaneChoice, airplancePieceChoice);
-					System.out.println(displayAirplaneData2(airPlaneBuyPiece));
 					
+					System.out.println(displayAirplaneData2(airPlanesDetailled.get(airplaneChoice)));
+				
 					} else {
-						System.out.println("Selectionner la pièce que vous souhaitez supprimer? ");
-						System.out.println(displayAirplaneData2(airPlaneBuyPiece));
-						int airplancePieceChoice = scanner.nextInt();
-						addPiece(airPlanesDetailled, airPlanePieceCatalogue, airplaneChoice, airplancePieceChoice);
-						System.out.println(displayAirplaneData2(airPlaneBuyPiece));
+						
 				
 				}
 				System.out.println("Souhaitez vous effectuer une nouvelle recherche? [o]Oui [n]non");
@@ -119,10 +116,10 @@ public class ProjetPlmV1 {
 		result+= (key+"="+Arrays.toString(data.get(key))+"\n");
 		return result;
 	}
-	public static String displayAirplaneData2 (HashMap<Integer, ArrayList<String[]>> data) {
+	public static String displayAirplaneData2 (ArrayList<String[]> data) {
 		String result = "";
-		for (Integer key : data.keySet())
-		result+= (key+"="+Arrays.toString(data.get(key))+"\n");
+		for (int i=0; i<data.size(); i++)
+		result+= (i+1+"="+Arrays.toString(data.get(i))+"\n");
 		return result;
 	}
 	
@@ -135,9 +132,13 @@ public class ProjetPlmV1 {
 		
 		String[] piecetoAdd = catalogue.get(pieceKey);
 		
-		dataPiece.put(planeKey-1, new ArrayList<String[]>());
+		if (dataPiece.containsKey(planeKey)) {
+			dataPiece.get(planeKey).add(piecetoAdd);
+		} else {
+		dataPiece.put(planeKey, new ArrayList<String[]>());
 		
-		dataPiece.get(planeKey-1).add(piecetoAdd);
+		dataPiece.get(planeKey).add(piecetoAdd);
+		}
 		
 	}
 	public static String searchedByWord (HashMap<Integer, String[]> data, String word) {
